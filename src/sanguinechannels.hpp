@@ -1,5 +1,7 @@
 #pragma once
 
+#include "rack.hpp"
+
 static const std::vector<std::string> channelNumbers = {
 	"1",
 	"2",
