@@ -64,7 +64,7 @@ struct RampGenerator {
 		ellapsedTime += deltaTime;
 		if (!finished) {
 			finished = ellapsedTime >= rampLength;
-			rampVoltage = clamp(ellapsedTime / rampLength, 0.f, 1.f);
+			rampVoltage = rack::math::clamp(ellapsedTime / rampLength, 0.f, 1.f);
 		} else {
 			reset();
 		}
