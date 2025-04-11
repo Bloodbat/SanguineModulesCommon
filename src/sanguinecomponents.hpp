@@ -327,6 +327,8 @@ struct SanguineShapedAcrylicLed : TSvgLight<TBase> {
 				if (backgroundFactor > 0.f) {
 					NVGcolor blendedColor = nvgRGBf(backgroundFactor, backgroundFactor, backgroundFactor);
 
+					// NOTE: the MetaModule is probably missing lights? It *may* draw the halo... if anything.
+#ifndef METAMODULE
 					const NSVGimage* mySvg = this->sw->svg->handle;
 					const int fillColor = rgbColorToInt(static_cast<int>(blendedColor.r * 255), static_cast<int>(blendedColor.g * 255),
 						static_cast<int>(blendedColor.b * 255), static_cast<int>(blendedColor.a * 255));
@@ -335,9 +337,11 @@ struct SanguineShapedAcrylicLed : TSvgLight<TBase> {
 
 					nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
 					svgDraw(args.vg, this->sw->svg->handle);
+#endif
 				}
 
 				// Main RGB color.
+#ifndef METAMODULE
 				const NSVGimage* mySvg = this->sw->svg->handle;
 				const int fillColor = rgbColorToInt(static_cast<int>(this->color.r * 255), static_cast<int>(this->color.g * 255),
 					static_cast<int>(this->color.b * 255), static_cast<int>(this->color.a * 255));
@@ -346,9 +350,11 @@ struct SanguineShapedAcrylicLed : TSvgLight<TBase> {
 
 				nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
 				svgDraw(args.vg, this->sw->svg->handle);
+#endif
 				this->drawHalo(args);
 			} else if (!this->module && this->color.a > 0.f) {
 				// Main RGB color.
+#ifndef METAMODULE
 				const NSVGimage* mySvg = this->sw->svg->handle;
 				const int fillColor = rgbColorToInt(static_cast<int>(this->color.r * 255), static_cast<int>(this->color.g * 255),
 					static_cast<int>(this->color.b * 255), static_cast<int>(this->color.a * 255));
@@ -357,6 +363,7 @@ struct SanguineShapedAcrylicLed : TSvgLight<TBase> {
 
 				nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
 				svgDraw(args.vg, this->sw->svg->handle);
+#endif
 			}
 		}
 		Widget::drawLayer(args, layer);

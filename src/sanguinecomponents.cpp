@@ -435,7 +435,9 @@ void SanguineLightUpSwitch::drawLayer(const DrawArgs& args, int layer) {
 				return;
 			}
 			nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
+#ifndef METAMODULE
 			rack::window::svgDraw(args.vg, svg->handle);
+#endif
 			if (frameNum < halos.size()) {
 				drawCircularHalo(args, box.size, halos[frameNum], 175.f, 8.f);
 			}
@@ -471,6 +473,7 @@ void SanguineLightUpRGBSwitch::drawLayer(const DrawArgs& args, int layer) {
 	// Programmers responsibility: set both a background and glyph or Rack will crash here. You've been warned.
 	if (layer == 1) {
 		if (module && !module->isBypassed() && sw->svg) {
+#ifndef METAMODULE
 			svgDraw(args.vg, sw->svg->handle);
 			uint32_t frameNum = getParamQuantity()->getValue();
 			nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
@@ -489,9 +492,11 @@ void SanguineLightUpRGBSwitch::drawLayer(const DrawArgs& args, int layer) {
 			or Rack will go to synth heaven.
 			*/
 			drawCircularHalo(args, box.size, halos[frameNum], 175.f, 8.f);
+#endif
 		}
 		// For module browser
 		else if (!module && sw->svg) {
+#ifndef METAMODULE
 			svgDraw(args.vg, sw->svg->handle);
 			fillSvgSolidColor(glyph->svg->handle, colors[0]);
 			nvgSave(args.vg);
@@ -499,6 +504,7 @@ void SanguineLightUpRGBSwitch::drawLayer(const DrawArgs& args, int layer) {
 				transformWidget->transform[3], transformWidget->transform[4], transformWidget->transform[5]);
 			svgDraw(args.vg, glyph->svg->handle);
 			nvgRestore(args.vg);
+#endif
 		}
 	}
 	Widget::drawLayer(args, layer);
@@ -576,6 +582,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 		if (layer == 1) {
 			if (module && !module->isBypassed()) {
 				int shapeIndex = 0;
+#ifndef METAMODULE
 				const NSVGimage* mySvg = svg->handle;
 
 				// Iterate shape linked list
@@ -650,6 +657,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 
 					// Fill shape with external gradient
 					if (svgGradient) {
+#ifndef METAMODULE
 						NSVGimage* myGradient = svgGradient->handle;
 						if (myGradient->shapes->fill.type) {
 							switch (myGradient->shapes->fill.type) {
@@ -669,6 +677,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 							}
 							nvgFill(args.vg);
 						}
+#endif
 					} else {
 						NVGcolor color = nvgRGB(0, 250, 0);
 						nvgFillColor(args.vg, color);
@@ -695,6 +704,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 
 					nvgRestore(args.vg);
 				}
+#endif
 
 				if (haloType) {
 					switch (*haloType)
@@ -745,7 +755,9 @@ void SanguineShapedLight::drawLayer(const DrawArgs& args, int layer) {
 		}
 		if (module && !module->isBypassed()) {
 			nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
+#ifndef METAMODULE
 			rack::window::svgDraw(args.vg, sw->svg->handle);
+#endif
 		}
 	}
 	Widget::drawLayer(args, layer);
@@ -785,10 +797,13 @@ void SanguineStaticRGBLight::draw(const DrawArgs& args) {
 			return;
 		}
 
+		// NOTE: MetaModule draws nothing here.
+#ifndef METAMODULE
 		const NSVGimage* mySvg = sw->svg->handle;
 
 		fillSvgSolidColor(mySvg, lightColor);
 		svgDraw(args.vg, sw->svg->handle);
+#endif
 	}
 	// else do not call Widget::draw: it draws on the wrong layer.
 }
@@ -800,14 +815,17 @@ void SanguineStaticRGBLight::drawLayer(const DrawArgs& args, int layer) {
 			return;
 		}
 		if (module && !module->isBypassed()) {
+#ifndef METAMODULE
 			const NSVGimage* mySvg = sw->svg->handle;
 
 			fillSvgSolidColor(mySvg, lightColor);
 			nvgGlobalCompositeBlendFunc(args.vg, NVG_ONE_MINUS_DST_COLOR, NVG_ONE);
 
 			svgDraw(args.vg, sw->svg->handle);
+#endif
 		}
 	}
+	// NOTE: MetaModule draws a gray shape, if anything.
 	Widget::drawLayer(args, layer);
 }
 
@@ -842,10 +860,14 @@ SanguineMutantsLogoLight::SanguineMutantsLogoLight(Module* theModule, const floa
 // Panels
 
 SanguinePanel::SanguinePanel(const std::string& newBackgroundFileName, const std::string& newForegroundFileName) {
+#ifndef METAMODULE
 	setBackground(Svg::load(asset::plugin(pluginInstance, newBackgroundFileName)));
 	foreground = new SvgWidget();
 	foreground->setSvg(Svg::load(asset::plugin(pluginInstance, newForegroundFileName)));
 	fb->addChildBelow(foreground, panelBorder);
+#else
+	setBackground(Svg::load(asset::plugin(pluginInstance, newBackgroundFileName)));
+#endif
 }
 
 void SanguinePanel::addLayer(const std::string& layerFileName) {
@@ -924,6 +946,7 @@ void SanguineModuleWidget::makePanel() {
 		break;
 	}
 
+#ifndef METAMODULE
 	std::string backplateFileName = "res/backplate_" + panelSizeStrings[panelSize] + backplateColorStrings[themeBackplateColor] + ".svg";
 
 	std::string faceplateFileName = "res/" + moduleName;
@@ -935,10 +958,34 @@ void SanguineModuleWidget::makePanel() {
 	faceplateFileName += faceplateThemeStrings[faceplateTheme] + ".svg";
 
 	SanguinePanel* panel = new SanguinePanel(backplateFileName, faceplateFileName);
+#else
+	/* NOTE: MetaModule uses a single, 240 pixels high, png with all elements instead of
+	   layered faceplates!
+	   E.g: aleae_faceplate_metamodule_plumbago.png */
+
+	   // Keep the "res" folder: MetaModule replaces it by itself.
+	std::string backplateFileName = "res/" + moduleName;
+
+	if (bFaceplateSuffix) {
+		backplateFileName += "_faceplate";
+	}
+
+	backplateFileName += "_metamodule";
+
+	backplateFileName += faceplateThemeStrings[faceplateTheme];
+
+	// Keep this as svg: MetaModule replaces it by itself.
+	backplateFileName += ".svg";
+
+	SanguinePanel* panel = new SanguinePanel(backplateFileName, "");
+#endif
+
+#ifndef METAMODULE
 	if (bHasCommon) {
 		panel->addLayer("res/" + moduleName + "_common.svg");
 	}
 	setPanel(panel);
+#endif
 }
 
 void SanguineModuleWidget::appendContextMenu(Menu* menu) {
