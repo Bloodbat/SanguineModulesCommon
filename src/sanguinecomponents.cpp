@@ -728,6 +728,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 
 // Decorations
 SanguineShapedLight::SanguineShapedLight(Module* theModule, const std::string& shapeFileName, const float X, const float Y, bool createCentered) {
+#ifndef METAMODULE
 	module = theModule;
 
 	setSvg(Svg::load(asset::plugin(pluginInstance, shapeFileName)));
@@ -737,17 +738,21 @@ SanguineShapedLight::SanguineShapedLight(Module* theModule, const std::string& s
 	} else {
 		box.pos = mm2px(Vec(X, Y));
 	}
+#endif
 }
 
 void SanguineShapedLight::draw(const DrawArgs& args) {
+#ifndef METAMODULE
 	// Draw lights in module browser.
 	if (!module) {
 		Widget::draw(args);
 	}
 	// else do not call Widget::draw: it draws on the wrong layer.
+#endif
 }
 
 void SanguineShapedLight::drawLayer(const DrawArgs& args, int layer) {
+#ifndef METAMODULE
 	if (layer == 1) {
 		//From SvgWidget::draw()
 		if (!sw->svg) {
@@ -761,6 +766,7 @@ void SanguineShapedLight::drawLayer(const DrawArgs& args, int layer) {
 		}
 	}
 	Widget::drawLayer(args, layer);
+#endif
 }
 
 SanguineStaticRGBLight::SanguineStaticRGBLight(Module* theModule, const std::string& shapeFileName, const float X, const float Y,
@@ -797,7 +803,7 @@ void SanguineStaticRGBLight::draw(const DrawArgs& args) {
 			return;
 		}
 
-		// NOTE: MetaModule draws nothing here.
+		// TODO: MetaModule draws nothing here.
 #ifndef METAMODULE
 		const NSVGimage* mySvg = sw->svg->handle;
 
@@ -825,7 +831,7 @@ void SanguineStaticRGBLight::drawLayer(const DrawArgs& args, int layer) {
 #endif
 		}
 	}
-	// NOTE: MetaModule draws a gray shape, if anything.
+	// TODO: MetaModule draws a gray shape, if anything.
 	Widget::drawLayer(args, layer);
 }
 

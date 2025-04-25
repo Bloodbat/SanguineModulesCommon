@@ -327,7 +327,7 @@ struct SanguineShapedAcrylicLed : TSvgLight<TBase> {
 				if (backgroundFactor > 0.f) {
 					NVGcolor blendedColor = nvgRGBf(backgroundFactor, backgroundFactor, backgroundFactor);
 
-					// NOTE: the MetaModule is probably missing lights? It *may* draw the halo... if anything.
+					// TODO: the MetaModule is probably missing lights? It *may* draw the halo... if anything.
 #ifndef METAMODULE
 					const NSVGimage* mySvg = this->sw->svg->handle;
 					const int fillColor = rgbColorToInt(static_cast<int>(blendedColor.r * 255), static_cast<int>(blendedColor.g * 255),
