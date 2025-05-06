@@ -11,7 +11,7 @@ inline bool getJsonInt(json_t* rootJ, const char* keyName, json_int_t& intValue)
     return static_cast<bool>(jsonObject);
 }
 
-inline bool getJsonBoolean(json_t* rootJ, const char* keyName, int& booleanValue) {
+inline bool getJsonBoolean(json_t* rootJ, const char* keyName, bool& booleanValue) {
     json_t* jsonObject = json_object_get(rootJ, keyName);
 
     if (jsonObject) {
