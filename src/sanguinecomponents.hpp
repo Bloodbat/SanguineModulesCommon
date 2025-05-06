@@ -5,6 +5,7 @@
 #include "sanguinehelpers.hpp"
 #include "themes.hpp"
 #include "sanguinedrawing.hpp"
+#include "sanguinejson.hpp"
 
 using namespace rack;
 

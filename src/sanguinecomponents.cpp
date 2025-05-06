@@ -885,22 +885,20 @@ void SanguinePanel::addLayer(const std::string& layerFileName) {
 // Modules
 
 void SanguineModule::dataFromJson(json_t* rootJ) {
-	json_t* uniqueThemeJ = json_object_get(rootJ, "uniqueSanguineTheme");
-	if (uniqueThemeJ) {
-		bUniqueTheme = json_boolean_value(uniqueThemeJ);
-		if (bUniqueTheme) {
-			json_t* moduleThemeJ = json_object_get(rootJ, "sanguineModuleTheme");
-			if (moduleThemeJ) {
-				currentTheme = FaceplateThemes(json_integer_value(moduleThemeJ));
-			}
+	getJsonBoolean(rootJ, "uniqueSanguineTheme", bUniqueTheme);
+
+	if (bUniqueTheme) {
+		json_int_t themeValue = 0;
+		if (getJsonInt(rootJ, "sanguineModuleTheme", themeValue)) {
+			currentTheme = FaceplateThemes(themeValue);
 		}
 	}
 }
 
 json_t* SanguineModule::dataToJson() {
 	json_t* rootJ = json_object();
-	json_object_set_new(rootJ, "uniqueSanguineTheme", json_boolean(bUniqueTheme));
-	json_object_set_new(rootJ, "sanguineModuleTheme", json_integer(int(currentTheme)));
+	setJsonBoolean(rootJ, "uniqueSanguineTheme", bUniqueTheme);
+	setJsonInt(rootJ, "sanguineModuleTheme", static_cast<int>(currentTheme));
 
 	return rootJ;
 }
