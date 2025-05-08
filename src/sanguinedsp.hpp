@@ -42,6 +42,8 @@ struct SaturatorFloat {
 	}
 };
 
+// Based on LittleUtils PulseGenerator, EUPL-1.2 GPL 3 compatible license.
+// Modified by Bloodbat, 2025.
 struct RampGenerator {
 	float ellapsedTime = 0.f;
 	float rampLength = 0.f;
