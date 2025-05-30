@@ -10,3 +10,10 @@ rack::math::Vec centerWidgetInMillimeters(rack::widget::Widget* theWidget, const
 inline long long getSystemTimeMs() {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
+
+inline bool strToUInt32(const char* inString, uint32_t& value) {
+	char* endPtr = {};
+	errno = 0;
+	value = std::strtoul(inString, &endPtr, 10);
+	return errno != ERANGE && errno != EINVAL && *endPtr == '\0';
+}
