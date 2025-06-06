@@ -1013,8 +1013,9 @@ void SanguineModuleWidget::makePanel() {
 	if (bHasCommon) {
 		panel->addLayer("res/" + moduleName + "_common.svg");
 	}
-	setPanel(panel);
 #endif
+
+	setPanel(panel);
 }
 
 void SanguineModuleWidget::appendContextMenu(Menu* menu) {
