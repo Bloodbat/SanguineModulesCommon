@@ -7,7 +7,7 @@ namespace sanguineRandom {
 #define M_PI 3.14159265358979323846
 #endif
 
-    static const float kDoublePi = 2.f * M_PI;
+    static constexpr float kDoublePi = 2.f * M_PI;
 
     // Based on Rack's random.hpp, tweaked to avoid a multiplication.
     /** Returns a normal random number with mean 0 and standard deviation 1 */
