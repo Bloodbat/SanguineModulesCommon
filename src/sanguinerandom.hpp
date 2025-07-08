@@ -3,6 +3,10 @@
 #include "rack.hpp"
 
 namespace sanguineRandom {
+#ifdef METAMODULE
+#define M_PI 3.14159265358979323846
+#endif
+
     static const float kDoublePi = 2.f * M_PI;
 
     // Based on Rack's random.hpp, tweaked to avoid a multiplication.
