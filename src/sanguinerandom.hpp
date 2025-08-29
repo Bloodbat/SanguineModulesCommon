@@ -70,4 +70,23 @@ namespace sanguineRandom {
         std::normal_distribution<float> normalDist;
         pcg32 pcgRng;
     };
+
+    /*
+       A random generator class which produces floats using normal distribution;
+       users most provide their own Uniform random bit generator.
+    */
+    class SanguineRandomNormalCustom {
+    public:
+        void init(const float mean = 0.f, const float deviation = 1.f) {
+            normalDist = std::normal_distribution<float>(mean, deviation);
+        }
+
+        template<typename UniformRNG>
+        inline float normal(UniformRNG& generator) {
+            return normalDist(generator);
+        }
+
+    private:
+        std::normal_distribution<float> normalDist;
+    };
 }
