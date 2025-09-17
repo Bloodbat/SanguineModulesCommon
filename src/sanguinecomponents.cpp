@@ -185,11 +185,11 @@ SanguineBezel115::SanguineBezel115() {
 SanguineBaseSegmentDisplay::SanguineBaseSegmentDisplay(uint32_t newCharacterCount, Module* theModule) {
 	characterCount = newCharacterCount;
 	module = theModule;
-	#ifndef METAMODULE
+#ifndef METAMODULE
 	fontSize = 10;
-	#else
+#else
 	fontSize = 18;
-	#endif
+#endif
 }
 
 void SanguineBaseSegmentDisplay::draw(const DrawArgs& args) {
@@ -215,7 +215,7 @@ void SanguineBaseSegmentDisplay::drawLayer(const DrawArgs& args, int layer) {
 			nvgTextLetterSpacing(args.vg, kerning);
 
 			Vec textPos = textMargin;
-			#ifndef METAMODULE
+#ifndef METAMODULE
 			nvgFillColor(args.vg, nvgTransRGBA(textColor, backgroundCharAlpha));
 			// Background of all characters
 			std::string backgroundText = "";
@@ -224,7 +224,7 @@ void SanguineBaseSegmentDisplay::drawLayer(const DrawArgs& args, int layer) {
 			}
 			nvgText(args.vg, textPos.x, textPos.y, backgroundText.c_str(), NULL);
 			nvgFillColor(args.vg, textColor);
-			#endif
+#endif
 
 			std::string displayValue = "";
 
@@ -314,11 +314,11 @@ SanguineMatrixDisplay::SanguineMatrixDisplay(uint32_t newCharacterCount, Module*
 {
 	fontName = "res/components/sanguinematrix.ttf";
 	box.size = mm2px(Vec(newCharacterCount * 5.70275f, 10.16f));
-	#ifndef METAMODULE
+#ifndef METAMODULE
 	fontSize = 16.45f;
-	#else
+#else
 	fontSize = 28;
-	#endif
+#endif
 	haloOpacity = 55;
 
 	if (createCentered) {
@@ -327,9 +327,9 @@ SanguineMatrixDisplay::SanguineMatrixDisplay(uint32_t newCharacterCount, Module*
 		box.pos = mm2px(Vec(X, Y));
 	}
 
-	#ifdef METAMODULE
+#ifdef METAMODULE
 	box.pos = Vec(box.pos.x - 10, box.pos.y + 10);
-	#endif
+#endif
 
 	backgroundCharacter = "\u2588";
 	textMargin = Vec(5, 24);
@@ -365,10 +365,10 @@ Sanguine96x32OLEDDisplay::Sanguine96x32OLEDDisplay(Module* theModule, const floa
 		box.pos = mm2px(Vec(X, Y));
 	}
 
-	#ifdef METAMODULE
+#ifdef METAMODULE
 	// Offset the y pos by a few pixels
 	box.pos = Vec(box.pos.x, box.pos.y + 6);
-	#endif
+#endif
 }
 
 void Sanguine96x32OLEDDisplay::draw(const DrawArgs& args) {
@@ -391,11 +391,11 @@ void Sanguine96x32OLEDDisplay::drawLayer(const DrawArgs& args, int layer) {
 		std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 		if (font) {
 			// Text
-			#ifndef METAMODULE
+#ifndef METAMODULE
 			nvgFontSize(args.vg, 6);
-			#else
+#else
 			nvgFontSize(args.vg, 14);
-			#endif
+#endif
 			nvgFontFaceId(args.vg, font->handle);
 
 			nvgFillColor(args.vg, textColor);
@@ -415,14 +415,14 @@ void Sanguine96x32OLEDDisplay::drawLayer(const DrawArgs& args, int layer) {
 						}
 						textCopy.erase(0, 8);
 						nvgText(args.vg, textPos.x, textPos.y, displayText.c_str(), NULL);
-						#ifndef METAMODULE // Truncated text for better readability on MM
+#ifndef METAMODULE // Truncated text for better readability on MM
 						textPos = Vec(3.f, 14.5f);
 						displayText = "";
 						for (uint32_t character = 0; (character < kCharactersPerLine || character < textCopy.length()); ++character) {
 							displayText += textCopy[character];
 						}
 						nvgText(args.vg, textPos.x, textPos.y, displayText.c_str(), NULL);
-						#endif
+#endif
 					} else {
 						nvgText(args.vg, textPos.x, textPos.y, oledText->c_str(), NULL);
 					}
@@ -633,7 +633,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 
 						nvgMoveTo(args.vg, path->pts[0], path->pts[1]);
 						for (int i = 1; i < path->npts; i += 3) {
-							float* p = &path->pts[2 * i];
+							float* p = &path->pts[i << 1];
 							nvgBezierTo(args.vg, p[0], p[1], p[2], p[3], p[4], p[5]);
 						}
 
@@ -660,7 +660,7 @@ void SanguineMultiColoredShapedLight::drawLayer(const DrawArgs& args, int layer)
 								continue;
 							}
 							for (int i = 1; i < path2->npts + 3; i += 3) {
-								float* p = &path2->pts[2 * i];
+								float* p = &path2->pts[i << 1];
 								// The previous point
 								math::Vec p2 = math::Vec(p[-2], p[-1]);
 								// The current point
