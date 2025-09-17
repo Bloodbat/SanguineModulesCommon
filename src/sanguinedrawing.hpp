@@ -31,7 +31,7 @@ inline void drawCircularHalo(const Widget::DrawArgs& args, const Vec boxSize, co
             float oradius = radius + std::min(radius * 4.f, 15.f);
 
             nvgBeginPath(args.vg);
-            nvgRect(args.vg, c.x - oradius, c.y - oradius, 2 * oradius, 2 * oradius);
+            nvgRect(args.vg, c.x - oradius, c.y - oradius, oradius * 2.f, oradius * 2.f);
 
             NVGcolor icol = color::mult(nvgTransRGBA(haloColor, haloOpacity), halo);
 
