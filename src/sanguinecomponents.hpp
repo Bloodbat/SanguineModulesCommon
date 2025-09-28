@@ -227,6 +227,17 @@ struct Sanguine96x32OLEDDisplay : TransparentWidget {
 	void drawLayer(const DrawArgs& args, int layer) override;
 };
 
+struct SanguineLedDisplayRounded : widget::Widget {
+	float radius; // Stated in points to get closest result to design.
+	NVGcolor gradientTopColor = nvgRGB(0x22, 0x22, 0x22);
+	NVGcolor gradientBottomColor = nvgRGB(0x12, 0x12, 0x12);
+	NVGcolor borderColor = nvgRGB(0x54, 0x54, 0x54);
+	SanguineLedDisplayRounded(const float X, const float Y, const float width,
+		const float height, const float theRadius, bool createCentered = true);
+	void draw(const DrawArgs& args) override;
+	void drawLayer(const DrawArgs& args, int layer) override;
+};
+
 // Switches
 
 struct SanguineLightUpSwitch : app::SvgSwitch {

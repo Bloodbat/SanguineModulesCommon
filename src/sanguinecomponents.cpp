@@ -438,6 +438,43 @@ void Sanguine96x32OLEDDisplay::drawLayer(const DrawArgs& args, int layer) {
 	Widget::drawLayer(args, layer);
 }
 
+SanguineLedDisplayRounded::SanguineLedDisplayRounded(const float X, const float Y, const float width,
+	const float height, const float theRadius, bool createCentered) {
+	radius = theRadius;
+
+	box.size = mm2px(Vec(width, height));
+
+	if (createCentered) {
+		box.pos = centerWidgetInMillimeters(this, X, Y);
+	} else {
+		box.pos = mm2px(Vec(X, Y));
+	}
+}
+
+void SanguineLedDisplayRounded::draw(const DrawArgs& args) {
+	// Black background
+	nvgBeginPath(args.vg);
+	nvgRoundedRect(args.vg, 0.f, 0.f, box.size.x, box.size.y, radius);
+	nvgFillPaint(args.vg, nvgLinearGradient(args.vg, 0.0, 0.0, 0.0, 25.0, gradientTopColor, gradientBottomColor));
+	nvgFill(args.vg);
+
+	nvgStrokeWidth(args.vg, 1.f);
+	nvgStrokeColor(args.vg, borderColor);
+	nvgStroke(args.vg);
+
+	// Draw children inside box
+	nvgScissor(args.vg, RECT_ARGS(args.clipBox));
+	Widget::draw(args);
+	nvgResetScissor(args.vg);
+}
+
+void SanguineLedDisplayRounded::drawLayer(const DrawArgs& args, int layer) {
+	// Draw children inside box
+	nvgScissor(args.vg, RECT_ARGS(args.clipBox));
+	Widget::drawLayer(args, layer);
+	nvgResetScissor(args.vg);
+}
+
 // Switches
 
 SanguineLightUpSwitch::SanguineLightUpSwitch() {
