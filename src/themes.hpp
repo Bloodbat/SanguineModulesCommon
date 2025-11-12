@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef _SANGUINE_THEMES
+#define _SANGUINE_THEMES
+
 #include <rack.hpp>
 
 enum PanelSizes {
@@ -84,3 +87,4 @@ void getDefaultTheme();
 void setDefaultTheme(int themeNum);
 
 extern FaceplateThemes defaultTheme;
+#endif
