@@ -83,8 +83,8 @@ static const std::vector<std::string> faceplateMenuLabels = {
 	"Plumbago"
 };
 
-void getDefaultTheme();
-void setDefaultTheme(int themeNum);
+void getDefaultSanguineTheme();
+void setDefaultSanguineTheme(int themeNum);
 
 extern FaceplateThemes defaultTheme;
 #endif

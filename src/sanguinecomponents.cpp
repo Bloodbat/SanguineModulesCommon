@@ -1074,7 +1074,7 @@ void SanguineModuleWidget::appendContextMenu(Menu* menu) {
 			menu->addChild(createMenuLabel("Applies across Sanguine modules"));
 			menu->addChild(createIndexSubmenuItem("Default", faceplateMenuLabels,
 				[=]() { return static_cast<int>(defaultTheme); },
-				[=](int i) { setDefaultTheme(i); sanguineModule->setModuleTheme(i); }
+				[=](int i) { setDefaultSanguineTheme(i); sanguineModule->setModuleTheme(i); }
 			));
 		}
 	));

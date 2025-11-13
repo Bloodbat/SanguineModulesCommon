@@ -5,7 +5,7 @@
 
 static std::string sanguineConfigFileName = rack::asset::user("SanguineModules.json");
 
-void getDefaultTheme() {
+void getDefaultSanguineTheme() {
 	FILE* configFile = fopen(sanguineConfigFileName.c_str(), "r");
 	if (configFile) {
 		json_error_t error;
@@ -21,7 +21,7 @@ void getDefaultTheme() {
 	}
 }
 
-void setDefaultTheme(int themeNum) {
+void setDefaultSanguineTheme(int themeNum) {
 	if (defaultTheme != FaceplateThemes(themeNum)) {
 		FILE* configFile = fopen(sanguineConfigFileName.c_str(), "w");
 		if (configFile) {
