@@ -2,6 +2,14 @@
 
 #include <rack.hpp>
 
+#ifdef CARDINALMUTANTS
+#define sanguineThemes sanguineMutantsThemes
+#endif
+
+#ifdef CARDINALMONSTERS
+#define sanguineThemes sanguineMonstersThemes
+#endif
+
 namespace sanguineThemes {
 	enum PanelSizes {
 		SIZE_5,
