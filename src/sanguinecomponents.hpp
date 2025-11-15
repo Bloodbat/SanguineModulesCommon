@@ -459,8 +459,8 @@ struct SanguineModule : Module {
 	enum ExpanderPositions { EXPANDER_LEFT, EXPANDER_RIGHT };
 
 	bool bUniqueTheme = false;
-	FaceplateThemes previousTheme = THEME_NONE;
-	FaceplateThemes currentTheme = THEME_VITRIOL;
+	sanguineThemes::FaceplateThemes previousTheme = sanguineThemes::THEME_NONE;
+	sanguineThemes::FaceplateThemes currentTheme = sanguineThemes::THEME_VITRIOL;
 	void dataFromJson(json_t* rootJ) override;
 	json_t* dataToJson() override;
 	void addExpander(Model* model, ModuleWidget* parentModuleWidget, ExpanderPositions expanderPosition = EXPANDER_RIGHT);
@@ -480,8 +480,8 @@ struct SanguineModuleWidget : ModuleWidget {
 	bool bFaceplateSuffix = true;
 	bool bHasCommon = true;
 	std::string moduleName;
-	PanelSizes panelSize = SIZE_34;
-	BackplateColors backplateColor = PLATE_PURPLE;
+	sanguineThemes::PanelSizes panelSize = sanguineThemes::SIZE_34;
+	sanguineThemes::BackplateColors backplateColor = sanguineThemes::PLATE_PURPLE;
 	void addScrews(int screwIds);
 	void appendContextMenu(Menu* menu) override;
 	void makePanel();

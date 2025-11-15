@@ -1,6 +1,7 @@
 ﻿#include "sanguinecomponents.hpp"
 
 using namespace rack;
+using namespace sanguineThemes;
 
 extern Plugin* pluginInstance;
 
@@ -952,7 +953,7 @@ void SanguineModule::dataFromJson(json_t* rootJ) {
 	if (bUniqueTheme) {
 		json_int_t themeValue = 0;
 		if (getJsonInt(rootJ, "sanguineModuleTheme", themeValue)) {
-			currentTheme = FaceplateThemes(themeValue);
+			currentTheme = sanguineThemes::FaceplateThemes(themeValue);
 		}
 	}
 }
@@ -966,7 +967,7 @@ json_t* SanguineModule::dataToJson() {
 }
 
 void SanguineModule::setModuleTheme(int themeNum) {
-	currentTheme = FaceplateThemes(themeNum);
+	currentTheme = sanguineThemes::FaceplateThemes(themeNum);
 	bUniqueTheme = true;
 }
 
@@ -986,8 +987,8 @@ void SanguineModule::addExpander(Model* model, ModuleWidget* parentModuleWidget,
 // Module widgets
 
 void SanguineModuleWidget::makePanel() {
-	BackplateColors themeBackplateColor = PLATE_PURPLE;
-	FaceplateThemes faceplateTheme = defaultTheme;
+	sanguineThemes::BackplateColors themeBackplateColor = sanguineThemes::PLATE_PURPLE;
+	sanguineThemes::FaceplateThemes faceplateTheme = sanguineThemes::defaultTheme;
 
 	// Programmer responsibility: if the module is not a SanguineModule, Rack will jump off a cliff.
 	// Now you know.
@@ -1003,17 +1004,18 @@ void SanguineModuleWidget::makePanel() {
 
 	switch (faceplateTheme)
 	{
-	case THEME_NONE:
-	case THEME_VITRIOL:
+	case sanguineThemes::THEME_NONE:
+	case sanguineThemes::THEME_VITRIOL:
 		themeBackplateColor = backplateColor;
 		break;
-	case THEME_PLUMBAGO:
-		themeBackplateColor = PLATE_BLACK;
+	case sanguineThemes::THEME_PLUMBAGO:
+		themeBackplateColor = sanguineThemes::PLATE_BLACK;
 		break;
 	}
 
 #ifndef METAMODULE
-	std::string backplateFileName = "res/backplate_" + panelSizeStrings[panelSize] + backplateColorStrings[themeBackplateColor] + ".svg";
+	std::string backplateFileName = "res/backplate_" +
+		sanguineThemes::panelSizeStrings[panelSize] + sanguineThemes::backplateColorStrings[themeBackplateColor] + ".svg";
 
 	std::string faceplateFileName = "res/" + moduleName;
 
@@ -1021,7 +1023,7 @@ void SanguineModuleWidget::makePanel() {
 		faceplateFileName += "_faceplate";
 	}
 
-	faceplateFileName += faceplateThemeStrings[faceplateTheme] + ".svg";
+	faceplateFileName += sanguineThemes::faceplateThemeStrings[faceplateTheme] + ".svg";
 
 	SanguinePanel* panel = new SanguinePanel(backplateFileName, faceplateFileName);
 #else
@@ -1064,7 +1066,7 @@ void SanguineModuleWidget::appendContextMenu(Menu* menu) {
 	menu->addChild(createSubmenuItem("Sanguine Modules themes", "",
 		[=](Menu* menu) {
 			menu->addChild(createMenuLabel("Applies to current module"));
-			menu->addChild(createIndexSubmenuItem("Module", faceplateMenuLabels,
+			menu->addChild(createIndexSubmenuItem("Module", sanguineThemes::faceplateMenuLabels,
 				[=]() { return static_cast<int>(sanguineModule->currentTheme); },
 				[=](int i) { sanguineModule->setModuleTheme(i); }
 			));
@@ -1072,9 +1074,9 @@ void SanguineModuleWidget::appendContextMenu(Menu* menu) {
 			menu->addChild(new MenuSeparator);
 
 			menu->addChild(createMenuLabel("Applies across Sanguine modules"));
-			menu->addChild(createIndexSubmenuItem("Default", faceplateMenuLabels,
-				[=]() { return static_cast<int>(defaultTheme); },
-				[=](int i) { setDefaultSanguineTheme(i); sanguineModule->setModuleTheme(i); }
+			menu->addChild(createIndexSubmenuItem("Default", sanguineThemes::faceplateMenuLabels,
+				[=]() { return static_cast<int>(sanguineThemes::defaultTheme); },
+				[=](int i) { sanguineThemes::setDefaultSanguineTheme(i); sanguineModule->setModuleTheme(i); }
 			));
 		}
 	));
@@ -1106,4 +1108,4 @@ void SanguineModuleWidget::step() {
 	Widget::step();
 }
 
-FaceplateThemes defaultTheme = THEME_VITRIOL;
+sanguineThemes::FaceplateThemes sanguineThemes::defaultTheme = sanguineThemes::THEME_VITRIOL;
