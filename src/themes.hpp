@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef _SANGUINE_THEMES
-#define _SANGUINE_THEMES
-
 #include <rack.hpp>
 
 namespace sanguineThemes {
@@ -88,5 +85,4 @@ namespace sanguineThemes {
 	void setDefaultSanguineTheme(int themeNum);
 
 	extern FaceplateThemes defaultTheme;
-#endif
 }
