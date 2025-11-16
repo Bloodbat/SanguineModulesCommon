@@ -9,6 +9,14 @@
 #include "pcg_random.hpp"
 #pragma GCC diagnostic pop
 
+#ifdef CARDINALMUTANTS
+#define sanguineRandom mutantsRandom
+#endif
+
+#ifdef CARDINALMONSTERS
+#define sanguineRandom monstersRandom
+#endif
+
 namespace sanguineRandom {
 #ifdef METAMODULE
 #define M_PI 3.14159265358979323846

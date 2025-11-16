@@ -1,6 +1,8 @@
 #include "themes.hpp"
 #include "sanguinejson.hpp"
 
+using namespace sanguineCommonCode;
+
 namespace sanguineThemes {
 	// Config file stuff: adapted from Venom's plugin.
 
