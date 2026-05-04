@@ -22,6 +22,7 @@ namespace sanguineThemes {
 		SIZE_12,
 		SIZE_13,
 		SIZE_14,
+		SIZE_15,
 		SIZE_16,
 		SIZE_17,
 		SIZE_20,
@@ -46,6 +47,7 @@ namespace sanguineThemes {
 		"12hp",
 		"13hp",
 		"14hp",
+		"15hp"
 		"16hp",
 		"17hp",
 		"20hp",
