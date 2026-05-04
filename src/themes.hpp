@@ -47,7 +47,7 @@ namespace sanguineThemes {
 		"12hp",
 		"13hp",
 		"14hp",
-		"15hp"
+		"15hp",
 		"16hp",
 		"17hp",
 		"20hp",
