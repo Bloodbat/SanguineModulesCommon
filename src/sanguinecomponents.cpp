@@ -375,14 +375,12 @@ namespace sanguineCommonCode {
 
 	void Sanguine96x32OLEDDisplay::draw(const DrawArgs& args) {
 		// Background
-		NVGcolor backgroundColor = nvgRGB(10, 10, 10);
-		NVGcolor borderColor = nvgRGB(100, 100, 100);
 		nvgBeginPath(args.vg);
 		nvgRect(args.vg, 0.f, 0.f, box.size.x, box.size.y);
-		nvgFillColor(args.vg, backgroundColor);
+		nvgFillColor(args.vg, displayColorGlass);
 		nvgFill(args.vg);
 		nvgStrokeWidth(args.vg, 1.f);
-		nvgStrokeColor(args.vg, borderColor);
+		nvgStrokeColor(args.vg, displayColorBorder);
 		nvgStroke(args.vg);
 
 		Widget::draw(args);

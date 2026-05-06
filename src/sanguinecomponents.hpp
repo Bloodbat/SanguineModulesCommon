@@ -6,6 +6,7 @@
 #include "themes.hpp"
 #include "sanguinedrawing.hpp"
 #include "sanguinejson.hpp"
+#include "sanguinecustomdisplays.hpp"
 
 #ifdef CARDINALMUTANTS
 #define sanguineCommonCode mutantsCommonCode
@@ -321,7 +322,7 @@ namespace sanguineCommonCode {
 	struct Rogan6PSLight : Base {
 		Rogan6PSLight() {
 			this->box.size = mm2px(Vec(23.04f, 23.04f));
-			this->borderColor = nvgRGBA(0, 0, 0, 0);
+			this->borderColor = displayColorBlackTransparent;
 		}
 	};
 

@@ -3,6 +3,7 @@
 // Drawing and color utils for Sanguine Components.
 
 #include "rack.hpp"
+#include "sanguinecustomdisplays.hpp"
 
 using namespace rack;
 
@@ -44,8 +45,8 @@ namespace sanguineCommonCode {
 
                 NVGcolor icol = color::mult(nvgTransRGBA(haloColor, haloOpacity), halo);
 
-                NVGcolor ocol = nvgRGBA(0, 0, 0, 0);
-                NVGpaint paint = nvgRadialGradient(args.vg, c.x, c.y, radius, oradius, icol, ocol);
+                NVGpaint paint = nvgRadialGradient(args.vg, c.x, c.y, radius, oradius, icol,
+                    displayColorBlackTransparent);
                 nvgFillPaint(args.vg, paint);
                 nvgFill(args.vg);
             }
@@ -70,8 +71,8 @@ namespace sanguineCommonCode {
 
         NVGcolor icol = color::mult(nvgTransRGBA(haloColor, haloOpacity), halo);
 
-        NVGcolor ocol = nvgRGBA(0, 0, 0, 0);
-        NVGpaint paint = nvgBoxGradient(args.vg, 4.5f + positionX, 4.5f, boxSize.x - 4.5f, boxSize.y - 4.5f, 5.f, 8.f, icol, ocol);
+        NVGpaint paint = nvgBoxGradient(args.vg, 4.5f + positionX, 4.5f, boxSize.x - 4.5f, boxSize.y - 4.5f, 5.f, 8.f, icol,
+            displayColorBlackTransparent);
         nvgFillPaint(args.vg, paint);
         nvgFill(args.vg);
 
