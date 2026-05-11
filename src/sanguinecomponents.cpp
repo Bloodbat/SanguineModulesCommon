@@ -645,12 +645,11 @@ namespace sanguineCommonCode {
 		if (innerColor && svg) {
 			if (layer == 1) {
 				if (module && !module->isBypassed()) {
-					int shapeIndex = 0;
 #ifndef METAMODULE
 					const NSVGimage* mySvg = svg->handle;
 
 					// Iterate shape linked list
-					for (NSVGshape* shape = mySvg->shapes; shape; shape = shape->next, ++shapeIndex) {
+					for (NSVGshape* shape = mySvg->shapes; shape; shape = shape->next) {
 
 						// Visibility
 						if (!(shape->flags & NSVG_FLAGS_VISIBLE)) {
