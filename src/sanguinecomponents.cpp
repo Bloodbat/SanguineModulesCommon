@@ -209,7 +209,6 @@ namespace sanguineCommonCode {
 
 	void SanguineBaseSegmentDisplay::drawLayer(const DrawArgs& args, int layer) {
 		if (layer == 1) {
-			std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 			if (font) {
 				// Text
 				nvgFontSize(args.vg, fontSize);
@@ -278,6 +277,7 @@ namespace sanguineCommonCode {
 	SanguineAlphaDisplay::SanguineAlphaDisplay(uint32_t newCharacterCount, Module* theModule, const float X, const float Y, bool createCentered) :
 		SanguineBaseSegmentDisplay(newCharacterCount, theModule) {
 		fontName = "res/components/Segment14.ttf";
+		font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 		box.size = mm2px(Vec(newCharacterCount * 12.6f, 21.2f));
 		fontSize = 40;
 
@@ -295,6 +295,7 @@ namespace sanguineCommonCode {
 	SanguineLedNumberDisplay::SanguineLedNumberDisplay(uint32_t newCharacterCount, Module* theModule, const float X, const float Y, bool createCentered) :
 		SanguineBaseSegmentDisplay(newCharacterCount, theModule) {
 		fontName = "res/components/Segment7Standard.otf";
+		font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 		box.size = mm2px(Vec(newCharacterCount * 7.75f, 15.f));
 		fontSize = 33.95f;
 
@@ -312,9 +313,9 @@ namespace sanguineCommonCode {
 	}
 
 	SanguineMatrixDisplay::SanguineMatrixDisplay(uint32_t newCharacterCount, Module* theModule, const float X, const float Y, bool createCentered) :
-		SanguineBaseSegmentDisplay(newCharacterCount, theModule)
-	{
+		SanguineBaseSegmentDisplay(newCharacterCount, theModule) {
 		fontName = "res/components/sanguinematrix.ttf";
+		font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 		box.size = mm2px(Vec(newCharacterCount * 5.70275f, 10.16f));
 #ifndef METAMODULE
 		fontSize = 16.45f;
@@ -367,6 +368,8 @@ namespace sanguineCommonCode {
 			box.pos = mm2px(Vec(X, Y));
 		}
 
+		font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
+
 #ifdef METAMODULE
 		// Offset the y pos by a few pixels
 		box.pos = Vec(box.pos.x, box.pos.y + 6);
@@ -388,7 +391,6 @@ namespace sanguineCommonCode {
 
 	void Sanguine96x32OLEDDisplay::drawLayer(const DrawArgs& args, int layer) {
 		if (layer == 1) {
-			std::shared_ptr<Font> font = APP->window->loadFont(asset::plugin(pluginInstance, fontName));
 			if (font) {
 				// Text
 #ifndef METAMODULE

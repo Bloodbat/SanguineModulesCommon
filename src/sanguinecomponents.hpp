@@ -191,19 +191,20 @@ namespace sanguineCommonCode {
 			std::string* displayText = nullptr;
 			int* numberValue;
 		} values;
+		std::shared_ptr<Font> font;
 
-		float fontSize;
-		unsigned char haloOpacity = 55;
-		unsigned char backgroundCharAlpha = 16;
-		DisplayType displayType = DISPLAY_STRING;
 		std::string backgroundCharacter = " ";
 		std::string fallbackString = "";
 		std::string fontName = "";
 		math::Vec textMargin = { 2.f, 2.f };
+		float fontSize;
 		float kerning = 2.f;
+		unsigned char haloOpacity = 55;
+		unsigned char backgroundCharAlpha = 16;
+		int fallbackNumber = 0;
+		DisplayType displayType = DISPLAY_STRING;
 		bool leadingZero = true;
 		bool drawHalo = true;
-		int fallbackNumber = 0;
 
 		SanguineBaseSegmentDisplay(uint32_t newCharacterCount, Module* theModule);
 		void draw(const DrawArgs& args) override;
@@ -232,6 +233,8 @@ namespace sanguineCommonCode {
 		std::string fallbackString = "";
 		std::string fontName = "";
 		NVGcolor textColor = nvgRGB(254, 254, 254);
+		std::shared_ptr<Font> font;
+
 		Sanguine96x32OLEDDisplay(Module* theModule, const float X, const float Y, bool createCentered = true);
 		void draw(const DrawArgs& args) override;
 		void drawLayer(const DrawArgs& args, int layer) override;
