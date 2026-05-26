@@ -52,14 +52,24 @@ namespace sanguineCommonCode {
 	};
 
 	// Based on LittleUtils PulseGenerator, EUPL-1.2 GPL 3 compatible license.
-	// Modified by Bloodbat, 2025.
+	// Modified by Bloodbat, 2026.
+	template <typename T = float>
 	struct RampGenerator {
-		float ellapsedTime = 0.f;
-		float rampLength = 0.f;
-		float rampVoltage = 1.f;
-		float resetVoltage = 1.f;
-		bool autoReset = true;
-		bool finished = true; // The output is the inverse of this.
+		T ellapsedTime;
+		T rampLength;
+		T rampVoltage;
+		T resetVoltage;
+		// bool autoReset; // For future use.
+		bool finished; // The output is the inverse of this.
+
+		RampGenerator() {
+			ellapsedTime = 0.f;
+			rampLength = 0.f;
+			rampVoltage = 1.f;
+			resetVoltage = 1.f;
+			// autoReset = true;
+			finished = true;
+		}
 
 		// Immediately resets the ramp.
 		void reset() {
@@ -70,19 +80,19 @@ namespace sanguineCommonCode {
 		}
 
 		// Advances state by deltaTime.
-		void process(float deltaTime) {
+		void process(T deltaTime) {
 			rampVoltage = resetVoltage;
 			ellapsedTime += deltaTime;
 			if (!finished) {
 				finished = ellapsedTime >= rampLength;
-				rampVoltage = rack::math::clamp(ellapsedTime / rampLength, 0.f, 1.f);
+				rampVoltage = clamp(ellapsedTime / rampLength, 0.f, 1.f);
 			} else {
 				reset();
 			}
 		}
 
 		// Begins a ramp with rampLength.
-		void trigger(float theRampLength) {
+		void trigger(T theRampLength) {
 			finished = false;
 			rampLength = theRampLength;
 		}
