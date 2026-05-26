@@ -87,4 +87,12 @@ namespace sanguineCommonCode {
 			rampLength = theRampLength;
 		}
 	};
+
+	/*
+	Linearly interpolates between "a" and "b", from "p = 0" to "p = 1" using
+	SIMD.
+	*/
+	inline rack::simd::float_4 crossfade(rack::simd::float_4 a, rack::simd::float_4 b, rack::simd::float_4 p) {
+		return a + (b - a) * p;
+	}
 }
