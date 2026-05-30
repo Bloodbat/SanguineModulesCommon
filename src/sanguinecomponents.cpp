@@ -152,6 +152,12 @@ namespace sanguineCommonCode {
 		fg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PSBlue_fg.svg")));
 	}
 
+	Sanguine2PSPurple::Sanguine2PSPurple() {
+		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PSPurple.svg")));
+		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PS_bg.svg")));
+		fg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PSPurple_fg.svg")));
+	}
+
 	Sanguine2PSRed::Sanguine2PSRed() {
 		setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PSRed.svg")));
 		bg->setSvg(Svg::load(asset::plugin(pluginInstance, "res/components/Sanguine2PS_bg.svg")));

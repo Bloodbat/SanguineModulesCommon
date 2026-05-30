@@ -152,6 +152,10 @@ namespace sanguineCommonCode {
 		Sanguine2PSBlue();
 	};
 
+	struct Sanguine2PSPurple : Rogan {
+		Sanguine2PSPurple();
+	};
+
 	struct Sanguine2PSRed : Rogan {
 		Sanguine2PSRed();
 	};
