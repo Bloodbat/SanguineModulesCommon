@@ -1019,6 +1019,9 @@ namespace sanguineCommonCode {
 		case sanguineThemes::THEME_PLUMBAGO:
 			themeBackplateColor = sanguineThemes::PLATE_BLACK;
 			break;
+		case sanguineThemes::THEME_GALENA:
+			themeBackplateColor = sanguineThemes::PLATE_GRAY;
+			break;
 		}
 
 #ifndef METAMODULE

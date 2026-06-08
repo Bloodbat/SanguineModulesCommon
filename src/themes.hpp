@@ -65,30 +65,35 @@ namespace sanguineThemes {
 		PLATE_PURPLE,
 		PLATE_RED,
 		PLATE_GREEN,
-		PLATE_BLACK
+		PLATE_BLACK,
+		PLATE_GRAY
 	};
 
 	static const std::vector<std::string> backplateColorStrings = {
 		"_purple",
 		"_red",
 		"_green",
-		"_black"
+		"_black",
+		"_gray"
 	};
 
 	enum FaceplateThemes {
 		THEME_NONE = -1,
 		THEME_VITRIOL,
-		THEME_PLUMBAGO
+		THEME_PLUMBAGO,
+		THEME_GALENA
 	};
 
 	static const std::vector<std::string> faceplateThemeStrings = {
 		"",
-		"_plumbago"
+		"_plumbago",
+		"_galena"
 	};
 
 	static const std::vector<std::string> faceplateMenuLabels = {
 		"Vitriol",
-		"Plumbago"
+		"Plumbago",
+		"Galena"
 	};
 
 	void getDefaultSanguineTheme();
