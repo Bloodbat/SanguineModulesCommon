@@ -472,6 +472,7 @@ namespace sanguineCommonCode {
 		enum ExpanderPositions { EXPANDER_LEFT, EXPANDER_RIGHT };
 
 		bool bUniqueTheme = false;
+		bool bEventDrivenCables = true;
 		sanguineThemes::FaceplateThemes previousTheme = sanguineThemes::THEME_NONE;
 		sanguineThemes::FaceplateThemes currentTheme = sanguineThemes::THEME_VITRIOL;
 		void dataFromJson(json_t* rootJ) override;
@@ -490,8 +491,10 @@ namespace sanguineCommonCode {
 			SCREW_ALL = 15
 		};
 
+		// TODO: make these private...
 		bool bFaceplateSuffix = true;
 		bool bHasCommon = true;
+		bool bShowSanguineOptions = true;
 		std::string moduleName;
 		sanguineThemes::PanelSizes panelSize = sanguineThemes::SIZE_34;
 		sanguineThemes::BackplateColors backplateColor = sanguineThemes::PLATE_PURPLE;

@@ -956,12 +956,15 @@ namespace sanguineCommonCode {
 				currentTheme = sanguineThemes::FaceplateThemes(themeValue);
 			}
 		}
+
+		getJsonBoolean(rootJ, "eventDrivenCables", bEventDrivenCables);
 	}
 
 	json_t* SanguineModule::dataToJson() {
 		json_t* rootJ = json_object();
 		setJsonBoolean(rootJ, "uniqueSanguineTheme", bUniqueTheme);
 		setJsonInt(rootJ, "sanguineModuleTheme", static_cast<int>(currentTheme));
+		setJsonBoolean(rootJ, "eventDrivenCables", bEventDrivenCables);
 
 		return rootJ;
 	}
@@ -1002,8 +1005,7 @@ namespace sanguineCommonCode {
 			}
 		}
 
-		switch (faceplateTheme)
-		{
+		switch (faceplateTheme) {
 		case sanguineThemes::THEME_NONE:
 		case sanguineThemes::THEME_VITRIOL:
 			themeBackplateColor = backplateColor;
@@ -1060,6 +1062,16 @@ namespace sanguineCommonCode {
 	void SanguineModuleWidget::appendContextMenu(Menu* menu) {
 		SanguineModule* sanguineModule = dynamic_cast<SanguineModule*>(this->module);
 		assert(sanguineModule);
+
+		if (bShowSanguineOptions) {
+			menu->addChild(new MenuSeparator);
+
+			menu->addChild(createSubmenuItem("Sanguine Modules options", "",
+				[=](Menu* menu) {
+					menu->addChild(createBoolPtrMenuItem("Event driven cable detection", "", &sanguineModule->bEventDrivenCables));
+				}
+			));
+		}
 
 		menu->addChild(new MenuSeparator);
 
